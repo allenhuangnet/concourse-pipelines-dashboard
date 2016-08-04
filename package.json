@@ -1,0 +1,19 @@
+{
+  "name": "concourse-pipelines-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard displaying all concourse pipelines and their statuses",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Allen Huang",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "lodash": "^4.14.1",
+    "nodemon": "^1.10.0",
+    "pug": "^2.0.0-beta4",
+    "request": "^2.74.0"
+  }
+}
