@@ -1,0 +1,40 @@
+body {
+	background-color: #273747;
+	text-align: center;
+}
+
+.container {
+	position: relative;
+	height: 100%;
+	vertical-align: middle;
+
+}
+
+.pipeline {
+	color: black;
+	display: inline-block;
+	
+	width: 200px;
+	height: 200px;
+	line-height: 200px;
+	margin: 5px;
+
+	border: 1px solid black;
+	border-radius: 10px;
+	text-align: center;
+	vertical-align: middle;
+
+	font-weight: bold;
+}
+
+.succeeded {
+	background-color: #2ECC71;
+}
+
+.build {
+	background-color: #F1C40F;
+}
+
+.failed {
+	background-color: #E74C3C ;
+}

@@ -1,5 +1,11 @@
 doctype html
 html
 	head
+		title="Concourse Pipelines Dashboard"
 		link(rel='stylesheet' href='css/overview.css')
 	body
+		.container
+			center
+				each pipeline in pipelines
+					a(href=config.concourse_url + pipeline.url)
+						.pipeline(class=pipeline.status)=pipeline.name
