@@ -1,5 +1,5 @@
 
-# ${1:Concourse Pipelines Dashboard}
+#Concourse Pipelines Dashboard
 The [Concourse CI](http://concourse.ci) tool currently does not have a nice way to view all your pipelines.
 Pipelines are hidden behind a drawer and the order depends on when you've added the pipeline (and can't be sorted)
 
