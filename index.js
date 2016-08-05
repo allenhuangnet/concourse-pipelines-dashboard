@@ -15,7 +15,6 @@ app.use(bodyParser.json());
 
 
 var pipelines;
-var pipeline_statuses = {};
 
 get_pipelines = (callback) => {
 	request({
@@ -49,6 +48,11 @@ get_pipeline_statuses = () => {
 
 app.get('/', (req, res) => {
 	res.render('overview', { config: config, pipelines: pipelines });
+});
+
+app.get('/refresh_pipelines', (req, res) => {
+	get_pipelines(get_pipeline_statuses);
+	res.status(200).send('complete');
 });
 
 app.listen(app.get('port'), () => {
