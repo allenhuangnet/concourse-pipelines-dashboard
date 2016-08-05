@@ -31,8 +31,12 @@ body {
 	background-color: #2ECC71;
 }
 
-.build {
-	background-color: #F1C40F;
+.aborted {
+	background-color: #8F4B2D;
+}
+
+.errored {
+	background-color: #E67E22 ;
 }
 
 .failed {
