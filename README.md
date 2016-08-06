@@ -7,6 +7,8 @@ This project solves this issue by using the Concourse REST API to create a singl
 
 ![screenshot](http://allenhuangnet1.ipage.com/_misc/concourse_dashboard/concourse-dashboard.png)
 
+Live Demo available [here](http://concourse-dashboard.herokuapp.com)
+
 ## Installation
 This project is written in node.js
 Clone the project and make sure all node dependencies are installed.
