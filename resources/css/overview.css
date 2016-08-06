@@ -12,6 +12,16 @@ body {
 
 }
 
+.footer {
+   position: fixed;
+   left: 0px;
+   bottom: 0px;
+   height: 40px;
+   width: 100%;
+   background: #1A252F;
+   line-height:  40px;
+}
+
 .pipeline {
 	color: #e6e7e8;
 	display: inline-block;
