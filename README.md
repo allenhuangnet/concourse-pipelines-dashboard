@@ -5,8 +5,7 @@ Pipelines are hidden behind a drawer and the order depends on when you've added 
 
 This project solves this issue by using the Concourse REST API to create a single page dashboard of all your pipelines that with their current statuses.
 
-
-TODO: include screenshot.
+![screenshot](http://allenhuangnet1.ipage.com/_misc/concourse_dashboard/concourse-dashboard.png)
 
 ## Installation
 This project is written in node.js
