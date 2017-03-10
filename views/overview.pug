@@ -9,7 +9,7 @@ html
 			center
 				each pipeline in pipelines
 					a(href=config.concourse_url + pipeline.url)
-						.pipeline(class=pipeline.status)=pipeline.name
+						div(class='pipeline ' + pipeline.status)=pipeline.name
 		.footer
 			|Last Updated: 
 			script(type='text/javascript').

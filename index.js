@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var config = require('./config')
 var request = require('request')
 var _ = require('lodash');
+var async = require('async')
 
 var app = express();
 
@@ -15,14 +16,33 @@ app.use(bodyParser.json());
 
 
 var pipelines;
+var token;
+
+get_bearer = (callback) => {
+    request({
+      url: config.concourse_url + config.api_subdirectory + "/teams/" + config.concourse_team + "/auth/token",
+      auth: {
+        username: config.concourse_username,
+        password: config.concourse_password
+      },
+      json: true,
+      strictSSL: false
+    }, (error, response, body) => {
+      if (!error && response.statusCode === 200) {
+        token = body.value;
+        callback();
+      } else {
+        console.log(error);
+      }
+    });
+}
 
 get_pipelines = (callback) => {
 	request({
 		url: config.concourse_url + config.api_subdirectory + "/pipelines",
-		auth: {
-			username: config.concourse_username,
-			password: config.concourse_password
-		},
+    headers:{
+      cookie: 'ATC-Authorization=Bearer ' + token
+    },
 		json: true,
 		strictSSL: false
 	}, (error, response, body) => {
@@ -35,14 +55,13 @@ get_pipelines = (callback) => {
 	});
 }
 
-get_pipeline_statuses = () => {
+get_pipeline_statuses = (callback) => {
 	for (pipeline of pipelines) {
 		request({
 			url: config.concourse_url + config.api_subdirectory + pipeline.url + "/jobs",
-			auth: {
-				username: config.concourse_username,
-				password: config.concourse_password
-			},
+      headers:{
+        cookie: 'ATC-Authorization=Bearer ' + token
+      },
 			json: true,
 			strictSSL: false
 		}, (error, response, body) => {
@@ -57,14 +76,28 @@ get_pipeline_statuses = () => {
 			}
 		});
 	}
+  callback();
 }
 
-setInterval(function() {
-	get_pipelines(get_pipeline_statuses);
-}, 5000);
-
 app.get('/', (req, res) => {
-	res.render('overview', { config: config, pipelines: pipelines });
+  async.series([
+      function(callback) {
+        if (config.use_bearer_token) {
+          get_bearer(callback);
+        } else {
+          callback();
+        }
+      }, 
+      get_pipelines,
+      get_pipeline_statuses
+      ], 
+      function (err, result) {
+      }
+    )
+  
+  if (pipelines != undefined && pipelines.length != 0) {
+    res.render('overview', {config: config, pipelines: pipelines})
+  }
 });
 
 app.listen(app.get('port'), () => {
