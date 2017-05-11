@@ -8,4 +8,4 @@ RUN npm --unsafe-perm install
 
 EXPOSE 8080
 
-ENTRYPOINT ["npm", "start"]
+ENTRYPOINT ["node", "index.js"]
