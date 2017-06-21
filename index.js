@@ -4,6 +4,7 @@ var config = require('./config')
 var request = require('request')
 var _ = require('lodash');
 var async = require('async')
+var basicAuth = require('express-basic-auth')
 
 var app = express();
 
@@ -13,7 +14,15 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/resources'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
+if (config.enable_basic_auth){
+  dashboard_user = {}
+  dashboard_user[config.basic_auth_user] = config.basic_auth_password
+  app.use(basicAuth({
+    users: dashboard_user,
+    challenge: true,
+    realm: "concourse-dashboard"
+  }))
+}
 
 var pipelines;
 var token;

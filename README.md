@@ -17,8 +17,22 @@ Edit the config.js file and update the required variables.
 TODO: flesh this out.
 
 ## Usage
+
+### Running from commandline
 ```
 cd .../concourse-pipelines-dashboard
 npm start 
+```
+
+### Running using Docker
+
+You can build the image locally by running `docker build -t my/concourse-pipeline-dashboard` or pull from dockerhub by running `docker pull innyso/concourse-pipeline-dashboard`
+
+To run the dasboard run `docker run -it --rm -p 8080:8080 my/concourse-pipeline-dasboard`
+
+To customise it with you setting, checkout config.js and inject appropriate environment variable to your docker container, for example
+
+```
+docker run -it --rm -e CONCOURSE_URL=http://my-concourse.ci -e CONCOURSE_USERNAME=my-username -e CONCOURSE_PASSWORD=my-password -e CONCOURSEi_TEAM=my-team -p 8080:8080 my/concourse-pipeline-dasboard
 ```
 
